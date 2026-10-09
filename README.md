@@ -50,15 +50,15 @@ The system never auto-hires, and knockout logic never rejects anyone on its own.
 
 ```mermaid
 flowchart LR
-    A[Candidate accepted] --> B[Admin review]
-    B --> C[Hire]
-    C --> D[HRis invite sent]
-    D --> E[New hire sets password]
-    E --> F[Mandatory new-hire wizard]
-    F --> G{File type}
-    G -- Soft --> H[Profile and policies<br/>Manager eligibility checkbox]
-    G -- Full --> I[Profile and policies<br/>I-9 Section 1 and W-4]
-    H --> J[Employee record active]
+    A["Candidate accepted"] --> B["Admin review"]
+    B --> C["Hire"]
+    C --> D["HRis invite sent"]
+    D --> E["New hire sets password"]
+    E --> F["Mandatory new-hire wizard"]
+    F --> G{"File type"}
+    G -- "Soft" --> H["Profile and policies<br/>Manager eligibility checkbox"]
+    G -- "Full" --> I["Profile and policies<br/>I-9 Section 1 and W-4"]
+    H --> J["Employee record active"]
     I --> J
 ```
 
@@ -75,14 +75,14 @@ Every user, whether employee, manager, admin, or consultant, signs in to the sam
 
 ```mermaid
 flowchart TB
-    subgraph Shell[One shell for every user]
+    subgraph ShellG["One shell for every user"]
         direction TB
-        Me[Me / My Desk - always visible]
-        Admin[Admin sections - shown by role]
+        Me["Me / My Desk - always visible"]
+        Admin["Admin sections - shown by role"]
     end
-    Roles[Assigned roles] --> Perms[Combined permissions]
+    Roles["Assigned roles"] --> Perms["Combined permissions"]
     Perms --> Admin
-    Perms --> Scope[Data scope: modules, applicants, companies]
+    Perms --> Scope["Data scope: modules, applicants, companies"]
 ```
 
 ### Roles and permissions
@@ -162,6 +162,12 @@ sequenceDiagram
 
 ```mermaid
 stateDiagram-v2
+    state "Invited" as Invited
+    state "Booked" as Booked
+    state "PendingReschedule" as PendingReschedule
+    state "Cancelled" as Cancelled
+    state "RecruiterFlagged" as RecruiterFlagged
+    state "Completed" as Completed
     [*] --> Invited
     Invited --> Booked: Candidate picks time
     Booked --> Booked: Candidate reschedules (within limits)
@@ -206,12 +212,12 @@ The diagram is intentionally general. It shows the product's shape, not implemen
 
 ```mermaid
 flowchart LR
-    U[Browser: employees, managers,<br/>admins, consultants, candidates] --> W[Web application<br/>role-aware UI]
-    W --> A[Application services<br/>permissions, workflows, audit]
-    A --> D[(Managed relational database)]
-    A --> Cal[Calendar provider<br/>free/busy and events]
-    A --> M[Transactional email<br/>invites and notifications]
-    A --> Docs[Document storage<br/>resumes, policies]
+    U["Browser: employees, managers,<br/>admins, consultants, candidates"] --> W["Web application<br/>role-aware UI"]
+    W --> A["Application services<br/>permissions, workflows, audit"]
+    A --> D[("Managed relational database")]
+    A --> Cal["Calendar provider<br/>free/busy and events"]
+    A --> M["Transactional email<br/>invites and notifications"]
+    A --> Docs["Document storage<br/>resumes, policies"]
 ```
 
 Design principles:
