@@ -1,6 +1,6 @@
 # Scalemaker HRis — Product Showcase
 
-Scalemaker HRis is an HRIS and applicant tracking system (ATS) built for small employers and the HR consultants who support them. It covers the full employee lifecycle in one place: recruiting, hiring, onboarding, employee files, contractors, time and attendance, leave, messages, payroll export, offboarding, and company structure.
+Scalemaker HRis is an HRIS and applicant tracking system (ATS) built for small employers and the HR consultants who support them. It covers the full employee lifecycle in one place: recruiting, hiring, onboarding, employee files, contractors, time and attendance, leave, messages, surveys, payroll export, offboarding, and company structure.
 
 **Built for the employee who uses it twice a year, not the administrator who uses it twice a day.** Every screen is checked against the question "Would someone who hasn't logged in for six months know exactly what to do?", and admin depth stays behind the scenes.
 
@@ -16,19 +16,23 @@ This repository is a **portfolio showcase**. It describes the product's design a
 - **Hiring history.** A timeline on the hire and a report across hiring. On the Profile, hiring history is collapsed.
 - **Onboarding templates** customized for each company.
 - **E-signatures** in the product for offers, Form I-9, and policies.
-- **One role-aware shell.** Plain menu labels, My Desk pinned for employees, a home that fits the role, and buttons only when that person can use them. Clicking a company, employee, job, request, or task opens it, and each page has a clear way back.
+- **One role-aware shell.** Plain menu labels, My Desk pinned for employees, a home that fits the role, and buttons only when that person can use them. Clicking a company, employee, job, request, or task opens it, and each page has a clear way back. Explanations start collapsed. Expanders close on an outside click.
+- **My Desk.** Rebuilt for hourly and exempt staff. The clock card shows live punch status. Punches save instantly and never wait on a passkey or location. A collapsed AI guide card sits on My Desk.
 - **What needs you.** My Desk opens on the tasks that need you. Each task links straight to itself, with its due date in plain words.
-- **Getting started.** A new user follows three plain steps: create your password, secure your account, and you're ready.
-- **Fine-grained roles** with per-module permissions and applicant scope. A person's record can grant or remove a permission, and the change history stays on the record. A hiring stage lead can advance or reject candidates at their stage.
-- **Multi-company consulting.** Consultants see only the companies assigned to them, and their home shows setup status. Credentials are tracked, and a new client assignment waits on current credentials.
+- **Getting started.** A new user follows three plain steps: create your password, secure your account, and you're ready. Sign-in help sits where people look for it.
+- **Passkeys.** Admins, consultants, and employees can set up a passkey once per device after a normal sign-in, then sign in with one tap on desktop and phone. Idle sign-out is unchanged.
+- **Fine-grained roles** with per-module permissions and applicant scope. A person's record can grant or remove a permission, and the change history stays on the record. A hiring stage lead can advance or reject candidates at their stage. Permission sections sit behind a click.
+- **Multi-company consulting.** Consultants see only the companies assigned to them, and their home shows setup status. Credentials are tracked, and a new client assignment waits on current credentials. Assigned HR consultants are shown at the client company.
 - **Tasks** grouped by person for admins, with recruiting to-dos included.
 - **ATS** with the applied date, stage interviewers, paused jobs, video interviews, Self Schedule, rescheduling with limits, and an append-only scheduling history. Applicants review a resume prefill before they submit and can remove a chosen resume. Word resumes preview on the page. Resume import also fills in a LinkedIn or portfolio link. The Jobs list shows job status, and a permitted user can change it. The Offer card's action is Make offer.
 - **Recruiting reach.** Organic job feeds for Indeed and ZipRecruiter, a per-job Post to job boards switch on the Job boards card, and applicant source tracking.
 - **Employee files** for active employees, paged and filterable by name, location, and department. Profile fields are edited in place by clicking them. Background and drug screen results stay off the profile. Licenses and certificates have their own form. A company admin can help their own employee get signed in, and a consultant can help an employee at an assigned company.
 - **Contractors** with W-9 status and 1099 totals.
-- **Messages** for company announcements and an Ask HR channel.
-- **Phone time clock.** Clock in and out from a phone. The mobile apps are prepared for an app-store release.
+- **Messages** for company announcements and an Ask HR channel. Ask HR routes to a role seat, and each question is its own thread.
+- **Surveys** for company admins and employees, with reporting filters, as-of snapshots, and an invitation email.
+- **Phone time clock.** Clock in and out from a phone. A downloadable phone setup guide walks through the steps. The home-screen icon uses the company mark and opens each user's own landing page. The mobile apps are prepared for an app-store release.
 - **FLSA status** on each person, exempt or non-exempt. Exempt employees use an attendance-only clock. Non-exempt time calculates weekly overtime.
+- **Break pay.** Completed breaks under a company-set threshold (default 30 minutes) count as paid. Longer ones are unpaid meal breaks.
 - **Punch review.** A manager with direct reports reviews, edits, and approves their own team's punches, without a company-wide timeclock privilege.
 - **Missed punches** left unresolved when a pay period closes. Setup chooses whether to hold payroll or pay that time on an off-cycle or the next payroll. The default does not hold payroll. An admin can resolve or clear one in a past pay period.
 - **Leave desk** in Time. Managers see dates only. A long leave for a manager asks who covers the team. The request form has Cancel, and a double-clicked request is saved once. A time-off request can start today, and the end date starts as the start date.
@@ -42,6 +46,7 @@ This repository is a **portfolio showcase**. It describes the product's design a
 - **Adding a new State?** guide in Company settings. It is HR guidance, not legal advice.
 - **Payroll and benefits export.** Ready-made payroll formats for common small-business providers, a standard file for any other provider, and a benefits carrier change file. Column order follows the vendor or carrier. The direct deposit form has safeguards. Pay can be split across more than one direct deposit account.
 - **AI advisor** on fictional demo companies only. It helps people find a screen, and a person confirms any change.
+- **AI guide.** A downloadable guide per seat. People bring their own AI app; the company does not run it. Click-by-click workflows, a HRis helps tab limited to the viewer's level and below, and a collapsed AI guide card on My Desk.
 - **Admin assist** with a clear banner and full audit attribution.
 
 ---
@@ -139,7 +144,7 @@ Every user, whether employee, manager, admin, payroll, or consultant, signs in t
 - **Payroll export**
 - **Company settings**
 
-**My Desk** is pinned at the top for anyone who is also an employee. It opens with a **What needs you** card. Each task links straight to itself, with its due date in plain words. My Desk also holds the person's own record, tasks, calendar, time, leave, resources, messages, pay stubs, and exit tasks. Pay stubs open the company's own payroll provider when the company has set one.
+**My Desk** is pinned at the top for anyone who is also an employee. The landing is rebuilt for hourly and exempt staff. It opens with a **What needs you** card. Each task links straight to itself, with its due date in plain words. The clock card shows live punch status. A punch saves instantly and never waits on a passkey or location. My Desk also holds the person's own record, tasks, calendar, time, leave, resources, messages, pay stubs, and exit tasks. A collapsed **AI guide** card sits on My Desk. Pay stubs open the company's own payroll provider when the company has set one.
 
 Each role lands on a home that fits it:
 
@@ -148,7 +153,7 @@ Each role lands on a home that fits it:
 - Payroll sees **Ready for payroll**.
 - Consultants see setup status.
 
-Buttons appear only when that person can use them.
+Buttons appear only when that person can use them. Explanations start collapsed. Expanders close on an outside click.
 
 Anywhere a company, employee, job, request, or task appears, clicking it opens that record. Each page has a clear way back.
 
@@ -158,11 +163,15 @@ Task and reminder emails carry one action button, such as **Review time-off requ
 flowchart TB
     subgraph ShellG["One shell for every user"]
         direction TB
-        Desk["My Desk - pinned for employees"]
+        Desk["My Desk - hourly and exempt"]
         Needs["What needs you"]
+        Clock["Clock card - live punch status"]
+        Guide["Collapsed AI guide card"]
         Work["People, Tasks, Time, Hiring,<br/>Compliance, Reports, Resources, Messages,<br/>Payroll export, Company settings"]
     end
     Desk --> Needs
+    Desk --> Clock
+    Desk --> Guide
     Roles["Assigned roles"] --> Perms["Combined permissions"]
     Perms --> Home["A home that fits the role"]
     Perms --> Work
@@ -171,7 +180,15 @@ flowchart TB
 
 ### Getting started
 
-A new user gets one plain-language **Getting started** flow in three steps: create your password, secure your account, and you're ready. Someone on a computer with their phone follows one path. Someone using only their phone follows another. Help is tucked behind **Having trouble?**
+A new user gets one plain-language **Getting started** flow in three steps: create your password, secure your account, and you're ready. Someone on a computer with their phone follows one path. Someone using only their phone follows another. **Sign-in help** sits where people look for it, behind **Having trouble?**
+
+After a normal sign-in, each device offers a one-time passkey setup. Admins, consultants, and employees can then sign in with one tap on desktop or phone. Idle sign-out is unchanged.
+
+```mermaid
+flowchart LR
+    SignIn["Normal sign-in"] --> Offer["One-time passkey setup on this device"]
+    Offer --> Tap["One-tap passkey sign-in"]
+```
 
 ### Roles and permissions
 
@@ -180,12 +197,12 @@ A new user gets one plain-language **Getting started** flow in three steps: crea
 - Recruiting roles include an **applicant scope**, so a user sees only the candidates they are meant to see.
 - Managers see their reporting line.
 - A user's access is the **sum of all their roles**, shown plainly on their own *My access* tab.
-- On the employee record, a permission can be granted or removed for that person. Each grant and removal is kept in the change history.
+- On the employee record, a permission can be granted or removed for that person. Each grant and removal is kept in the change history. Permission sections sit behind a click.
 - A hiring stage lead can advance or reject candidates at their stage.
 
 ### Consultants and multiple companies
 
-HR consultants can serve several client companies. A consultant sees **only the companies assigned to them**, listed under *Your Companies* on their My access tab. A consultant's home shows setup status.
+HR consultants can serve several client companies. A consultant sees **only the companies assigned to them**, listed under *Your Companies* on their My access tab. A consultant's home shows setup status. Assigned HR consultants are shown at the client company.
 
 Each consultant's credentials are tracked. Every consultant holds an HR certification. A new client company can be assigned only when that consultant's credentials are current.
 
@@ -221,12 +238,14 @@ Contractors follow a contractor path. The record shows W-9 status and 1099 total
 
 ## Messages
 
-Messages has two parts. **Announcements** go to the whole company. **Ask HR** is the channel for questions to HR.
+Messages has two parts. **Announcements** go to the whole company. **Ask HR** is the channel for questions to HR. Ask HR routes each question to a role seat. Each question is its own thread.
 
 ```mermaid
 flowchart LR
     Messages["Messages"] --> Announcements["Company announcements"]
     Messages --> Ask["Ask HR"]
+    Ask --> Seat["Routes to a role seat"]
+    Seat --> Thread["Each question is its own thread"]
 ```
 
 A company setting turns messaging on or off. It is off for a new company.
@@ -249,6 +268,18 @@ Opening a case prompts a legal hold. Messages under hold are never removed by re
 
 Every case action goes into an append-only log: opened, viewed, exported, and hold placed or released. The person being investigated cannot see the log. Exports are watermarked with the case reference.
 
+## Surveys
+
+Company admins and employees can send surveys. Reports can be filtered. An as-of snapshot captures results at a point in time. People get an invitation email.
+
+```mermaid
+flowchart LR
+    Survey["Survey"] --> Invite["Invitation email"]
+    Invite --> Answers["Responses"]
+    Answers --> Snap["As-of snapshot"]
+    Answers --> Report["Filtered report"]
+```
+
 ## Org chart
 
 A top-down, collapsible org chart is built from reporting lines. Admins also get a restructure mode for planning changes. The org chart lives under People.
@@ -267,9 +298,28 @@ Job, pay, and manager changes are kept as dated history. A job change covers tit
 
 ## Time
 
-Employees can clock in and out on a phone time clock. The mobile apps are prepared for an app-store release.
+Employees can clock in and out on a phone time clock. The clock card on My Desk shows live punch status. A punch saves instantly and never waits on a passkey or location. The mobile apps are prepared for an app-store release.
+
+A downloadable **phone setup** guide walks through adding the clock to a phone. The home-screen icon uses the company mark and opens each user's own landing page.
+
+```mermaid
+flowchart LR
+    Guide["Downloadable phone setup guide"] --> Icon["Home-screen icon uses the company mark"]
+    Icon --> Land["Opens that user's landing page"]
+```
 
 Each person has an **FLSA status**: exempt or non-exempt. An exempt employee uses an attendance-only clock. Weekly overtime is calculated on non-exempt time.
+
+### Break pay
+
+A completed break under a company-set threshold counts as paid. The default is 30 minutes. A longer break is an unpaid meal break.
+
+```mermaid
+flowchart LR
+    Break["Completed break"] --> Rule{"Under the company threshold"}
+    Rule -- "Yes" --> Paid["Paid break"]
+    Rule -- "No" --> Meal["Unpaid meal break"]
+```
 
 ### Punch review
 
@@ -281,7 +331,8 @@ A missed punch that is still unresolved when the pay period closes stays open. I
 
 ```mermaid
 flowchart LR
-    Punch["Punch"] --> Review["Manager Punch review"]
+    Punch["Punch saves instantly"] --> Status["Live status on the clock card"]
+    Status --> Review["Manager Punch review"]
     Review --> Close["Pay period close"]
     Close --> Missed["Missed punch handling"]
     Missed --> Export["Payroll export"]
@@ -421,11 +472,11 @@ flowchart LR
 
 ```mermaid
 sequenceDiagram
-    participant R as Recruiter
-    participant S as Scalemaker HRis
-    participant C as Calendar provider
-    participant V as Video meeting provider
-    participant K as Candidate
+    participant R as "Recruiter"
+    participant S as "Scalemaker HRis"
+    participant C as "Calendar provider"
+    participant V as "Video meeting provider"
+    participant K as "Candidate"
     R->>S: Send a Self Schedule invite
     alt Video interview that will not get a meeting link
         S-->>R: Warning that no video-meeting link will be created
@@ -550,6 +601,8 @@ The fallback order can be adjusted here as well.
 
 **Missed punches.** When a pay period closes, the company chooses whether an unresolved missed punch holds payroll or is paid on an off-cycle or the next payroll. The default does not hold payroll.
 
+**Break pay.** The company sets the paid-break threshold. The default is 30 minutes. Completed breaks under that threshold count as paid. Longer ones are unpaid meal breaks.
+
 ---
 
 ## Adding a new State?
@@ -602,6 +655,22 @@ It is a read-only guide. It helps a person find the right screen. It also offers
 
 A suggestion is applied in two steps, and only by a person. A permitted person reviews a plain list of suggested changes, then confirms. The advisor never acts on its own. Only low-risk changes are allowed, such as reassigning a manager, moving a department, or assigning a task. Terminations, pay, and permissions are refused. Manager and department changes can be undone.
 
+## AI guide
+
+Each seat gets a downloadable **AI guide**. People bring their own AI app. The company does not run that app.
+
+The guide has click-by-click workflows. A **HRis helps** tab shows help for the viewer's level and below. My Desk shows a collapsed AI guide card.
+
+```mermaid
+flowchart TB
+    Seat["Each seat"] --> Guide["Downloadable AI guide"]
+    Guide --> Own["People bring their own AI app"]
+    Guide --> Steps["Click-by-click workflows"]
+    Guide --> Helps["HRis helps tab"]
+    Helps --> Level["Viewer's level and below"]
+    Desk["My Desk"] --> Card["Collapsed AI guide card"]
+```
+
 ---
 
 ## High-level architecture
@@ -616,6 +685,7 @@ flowchart LR
     A --> Cal["Calendar provider<br/>free/busy and events"]
     A --> Vid["Video meeting provider<br/>meeting links"]
     A --> Advisor["Read-only AI advisor<br/>fictional demo companies only"]
+    A --> Guide["Downloadable AI guide<br/>people bring their own AI app"]
     A --> M["Transactional email<br/>invites and notifications"]
     A --> Docs["Document storage<br/>resumes, policies, signatures"]
     A --> Jobs["Organic job feeds<br/>Indeed and ZipRecruiter"]
