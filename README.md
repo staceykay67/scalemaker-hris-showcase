@@ -1,6 +1,6 @@
 # Scalemaker HRis — Product Showcase
 
-Scalemaker HRis is an HRIS and applicant tracking system (ATS) built for small employers and the HR consultants who support them. It covers the full employee lifecycle in one place: recruiting, hiring, onboarding, employee files, contractors, time and attendance, leave, messages, surveys, payroll export, offboarding, and company structure.
+Scalemaker HRis is an HRIS and applicant tracking system (ATS) built for small employers and the HR consultants who support them. It covers the full employee lifecycle in one place: recruiting, hiring, onboarding, employee files, performance, contractors, time and attendance, leave, messages, surveys, payroll export, offboarding, and company structure.
 
 **Built for the employee who uses it twice a year, not the administrator who uses it twice a day.** Every screen is checked against the question "Would someone who hasn't logged in for six months know exactly what to do?", and admin depth stays behind the scenes.
 
@@ -10,39 +10,46 @@ This repository is a **portfolio showcase**. It describes the product's design a
 
 ## Highlights
 
-- **Two-tier data model (Soft and Full)** that lets a company start without collecting sensitive personal data.
+- **Two-tier data model (Lite and Full)** that lets a company start without collecting sensitive personal data. Full and Lite run the same processes. The only difference is Full-file items such as Social Security number, date of birth, and bank information.
 - **Human-decides gates.** A person extends every offer, and the candidate accepts. Acceptance hires the person. Nothing rejects a candidate on its own.
 - **Guided hire-to-onboard flow.** Acceptance hires the person. Pending hires are numbered, edits stay in sync from the offer through the hire, and a pending hire can have a manager. The person is Pending start, or Pending contingencies while required checks are open, and Active on the start date. A pending start stays visible if the first day moves earlier. The HRis invite, password, and mandatory new-hire wizard follow. Rescinding a pending hire withdraws an unused product invite, and the admin is told if a hire's invite did not send.
+- **Prehires.** The Employees list has a Prehires view for Pending hire, Pending contingencies, and Pending start. Active + Leave shows only Active and On leave. Prehires stay off the org chart and directory until they start. Lite has its own onboarding checklist.
 - **Hiring history.** A timeline on the hire and a report across hiring. On the Profile, hiring history is collapsed.
 - **Onboarding templates** customized for each company.
+- **Structured offer terms.** An offer carries title, pay, department, location, full-time or part-time, work arrangement, worker type, and start date. The letter and snapshot are built from those fields. Pay basis locks to the Job. Location and start date are required to send.
 - **E-signatures** in the product for offers, Form I-9, and policies.
-- **One role-aware shell.** Plain menu labels, My Desk pinned for employees, a home that fits the role, and buttons only when that person can use them. Clicking a company, employee, job, request, or task opens it, and each page has a clear way back. Explanations start collapsed. Expanders close on an outside click.
+- **One role-aware shell.** Plain menu labels, including **Jobs & Recruiting**, My Desk pinned for employees, a home that fits the role, and buttons only when that person can use them. Clicking a company, employee, job, request, or task opens it, and each page has a clear way back. Explanations start collapsed. Expanders close on an outside click.
 - **My Desk.** Rebuilt for hourly and exempt staff. The clock card shows live punch status. Punches save instantly and never wait on a passkey or location. A collapsed AI guide card sits on My Desk.
 - **What needs you.** My Desk opens on the tasks that need you. Each task links straight to itself, with its due date in plain words.
 - **Getting started.** A new user follows three plain steps: create your password, secure your account, and you're ready. Sign-in help sits where people look for it.
 - **Passkeys.** Admins, consultants, and employees can set up a passkey once per device after a normal sign-in, then sign in with one tap on desktop and phone. Idle sign-out is unchanged.
 - **Fine-grained roles** with per-module permissions and applicant scope. A person's record can grant or remove a permission, and the change history stays on the record. A hiring stage lead can advance or reject candidates at their stage. Permission sections sit behind a click.
-- **Multi-company consulting.** Consultants see only the companies assigned to them, and their home shows setup status. Credentials are tracked, and a new client assignment waits on current credentials. Assigned HR consultants are shown at the client company.
-- **Tasks** grouped by person for admins, with recruiting to-dos included.
+- **Multi-company consulting.** Consultants see only the companies assigned to them, and their home shows setup status. Credentials are tracked, and a new client assignment waits on current credentials. Credentials collapse after save. A credential expiry does not cut access on its own. Assigned HR consultants are shown at the client company.
+- **Tasks** grouped by person for admins, with recruiting to-dos included. Admins and Assist can complete their reports' tasks. Errors show inline.
 - **ATS** with the applied date, stage interviewers, paused jobs, video interviews, Self Schedule, rescheduling with limits, and an append-only scheduling history. Applicants review a resume prefill before they submit and can remove a chosen resume. Word resumes preview on the page. Resume import also fills in a LinkedIn or portfolio link. The Jobs list shows job status, and a permitted user can change it. The Offer card's action is Make offer.
 - **Recruiting reach.** Organic job feeds for Indeed and ZipRecruiter, a per-job Post to job boards switch on the Job boards card, and applicant source tracking.
 - **Employee files** for active employees, paged and filterable by name, location, and department. Profile fields are edited in place by clicking them. Background and drug screen results stay off the profile. Licenses and certificates have their own form. A company admin can help their own employee get signed in, and a consultant can help an employee at an assigned company.
+- **Display and legal names.** A preferred or display name is shown across the product. The legal name is kept for official records.
+- **My information.** Employees open Profile first. Sections the admin controls are marked Set by your admin. Contact details can be updated without HR approval. Acknowledgement name mismatches show on the form. Benefits includes I am declining coverage.
+- **Pay classification on the Job.** Hourly vs Salary, FLSA status, and exempt basis live on the Job, not on each person. A pay change is only the amount. Frequency comes from the company pay cycle. Overtime follows non-exempt status. The profile header shows the classification.
+- **Performance.** Company setup has a Performance area. Goals, Reviews, and Coaching start on. Employees can add and edit their own goals. Goals are collaborative. Coaching has an audit trail. Unshared coaching notes are hidden from HR by default. Feedback, Discipline, and PIPs are Coming.
 - **Contractors** with W-9 status and 1099 totals.
 - **Messages** for company announcements and an Ask HR channel. Ask HR routes to a role seat, and each question is its own thread.
 - **Surveys** for company admins and employees, with reporting filters, as-of snapshots, and an invitation email.
-- **Phone time clock.** Clock in and out from a phone. A downloadable phone setup guide walks through the steps. The home-screen icon uses the company mark and opens each user's own landing page. The mobile apps are prepared for an app-store release.
-- **FLSA status** on each person, exempt or non-exempt. Exempt employees use an attendance-only clock. Non-exempt time calculates weekly overtime.
+- **Phone time clock.** Clock in and out from a phone. Times show in the company's time zone. A downloadable phone setup guide walks through the steps. The home-screen icon uses the company mark and opens each user's own landing page. The mobile apps are prepared for an app-store release.
+- **FLSA status** comes from the person's Job, exempt or non-exempt. Exempt employees use an attendance-only clock. Non-exempt time calculates weekly overtime.
 - **Break pay.** Completed breaks under a company-set threshold (default 30 minutes) count as paid. Longer ones are unpaid meal breaks.
-- **Punch review.** A manager with direct reports reviews, edits, and approves their own team's punches, without a company-wide timeclock privilege.
+- **Punch review.** Compact per-period timelines. A pending clock-out pairs with its clock-in on one card for manager review. Approvers can see the original time on a correction. Prior-period punch adjustments land on the next payroll.
 - **Missed punches** left unresolved when a pay period closes. Setup chooses whether to hold payroll or pay that time on an off-cycle or the next payroll. The default does not hold payroll. An admin can resolve or clear one in a past pay period.
 - **Leave desk** in Time. Managers see dates only. A long leave for a manager asks who covers the team. The request form has Cancel, and a double-clicked request is saved once. A time-off request can start today, and the end date starts as the start date.
 - **Person fallback.** Work for someone who is terminated, exiting, or on leave goes to the next active person, and the handoff is logged.
-- **Exits** for Soft and Full. A person confirms the exit, tasks route to roles, and direct reports get an interim owner before the last day.
+- **Exits** for Lite and Full. A person confirms the exit, tasks route to roles, and direct reports get an interim owner before the last day.
 - **Employment history** for job, pay, and manager changes, including changes dated in the future.
 - **Compliance** for Form I-9, Form W-4, state withholding, and new-hire reporting, with a clear status on each person. Form I-9 has an audit trail and a retention schedule that shows when each I-9 can be purged. Automated state new-hire reporting and E-Verify are built and off until a company opts in.
+- **Work state.** Each person has a detected work state so state-specific rules can apply.
 - **Records requests and OSHA.** Clocks track response deadlines for employee records requests. Accommodation requests are logged, and so is each view of an employee record. An OSHA injury and illness intake opens follow-up tasks that close out.
-- **Voluntary EEO** on Soft and Full. Answers stay out of hiring views and are reported only as aggregate counts.
-- **Company setup.** A guided wizard for a new company. Settings cover departments, a Common holidays picker, document types, and contacts.
+- **Voluntary EEO** on Lite and Full. Answers stay out of hiring views and are reported only as aggregate counts.
+- **Company setup.** A guided wizard for a new company. Settings cover departments, a Common holidays picker, document types, contacts, and Performance.
 - **Adding a new State?** guide in Company settings. It is HR guidance, not legal advice.
 - **Payroll and benefits export.** Ready-made payroll formats for common small-business providers, a standard file for any other provider, and a benefits carrier change file. Column order follows the vendor or carrier. The direct deposit form has safeguards. Pay can be split across more than one direct deposit account.
 - **AI advisor** on fictional demo companies only. It helps people find a screen, and a person confirms any change.
@@ -51,21 +58,21 @@ This repository is a **portfolio showcase**. It describes the product's design a
 
 ---
 
-## Soft vs Full
+## Lite vs Full
 
-Scalemaker HRis has two file types with the **same information architecture**. Users learn one set of screens, and the file type decides which data can be stored.
+Scalemaker HRis has two file types with the **same information architecture**. Users learn one set of screens, and the file type decides which data can be stored. Full and Lite run the same processes. The only difference is Full-file items such as Social Security number, date of birth, and bank information.
 
-| | Soft | Full |
+| | Lite | Full |
 |---|---|---|
 | Purpose | Day-to-day people operations without sensitive PII | Complete employment records, including sensitive PII |
-| Sensitive PII | Never stored | Supported |
+| Sensitive PII | Never stored | Supported, including Social Security number, date of birth, and bank information |
 | New-hire wizard | No employee I-9; the manager confirms eligibility with a checkbox | Includes I-9 Section 1 and W-4 |
 | Leave | Reason category, dates, status, balances, and notice dates; no documents | Medical certifications in a restricted medical file, separate from the personnel file; every view is logged |
 | Exits | Reason category, notes, and document names | Reason category, notes, document names, and separation and release documents |
 | EEO self-identification | Voluntary for applicants. Answers stay apart from the application | Same |
 | Current status | In use | Holds fictional testers only until a penetration test and SOC 2 are complete |
 
-Because the screens are the same, a company can move from Soft to Full later without retraining anyone.
+Because the screens are the same, a company can move from Lite to Full later without retraining anyone.
 
 ---
 
@@ -97,19 +104,29 @@ flowchart TB
     Invite --> Pass["New hire sets password"]
     Pass --> Wiz["Mandatory new-hire wizard"]
     Wiz --> File{"File type"}
-    File -- "Soft" --> Soft["Profile and policies<br/>Manager eligibility checkbox"]
+    File -- "Lite" --> Lite["Profile and policies<br/>Manager eligibility checkbox"]
     File -- "Full" --> Full["Profile and policies<br/>I-9 Section 1 and W-4"]
-    Soft --> Done["Employee record active"]
+    Lite --> Done["Employee record active"]
     Full --> Done
 ```
 
 When the candidate accepts, that acceptance hires the person. Pending hires are numbered. Edits to the new hire stay in sync through the offer and the hire. A pending hire can have a manager. The person becomes **Pending start**, or **Pending contingencies** while a required background check, drug screen, or references are open. Only basic onboarding is released during contingencies. Employment status becomes **Active** on the start date. If the first day moves earlier, the pending start stays visible. A person can rescind the hire before the start date. Rescinding a pending hire withdraws that person's unused product invite. If a hire's invite did not send, the admin is told. The hiring manager and admins are notified. Every step is logged.
 
+The Employees list has a **Prehires** view for Pending hire, Pending contingencies, and Pending start. **Active + Leave** shows only Active and On leave. Prehires stay off the org chart and directory until they start.
+
+```mermaid
+flowchart LR
+    List["Employees list"] --> Pre["Prehires: Pending hire,<br/>Pending contingencies, Pending start"]
+    List --> ActiveLeave["Active + Leave:<br/>Active and On leave"]
+    Pre --> StartDate["Active on the start date"]
+    StartDate --> Dir["Org chart and directory"]
+```
+
 The wizard is mandatory. A new hire cannot reach the rest of the app until it is complete.
 
-Sending an offer, and the candidate accepting it, completes the matching hiring checklist steps. The start date comes from the accepted offer.
+Sending an offer, and the candidate accepting it, completes the matching hiring checklist steps. The start date comes from the accepted offer. An offer carries title, pay, department, location, full-time or part-time, work arrangement, worker type, and start date as fields. The offer letter and snapshot are built from those fields. Pay basis locks to the Job's pay type. Location and start date are required to send.
 
-An admin can select several open onboarding tasks and email them to the new hire in one message. The admin previews the message first. It lists the task titles and due dates, and it includes a single sign-in link. It does not include personal details. On a Soft file, steps that stay with the manager are not selectable.
+An admin can select several open onboarding tasks and email them to the new hire in one message. The admin previews the message first. It lists the task titles and due dates, and it includes a single sign-in link. It does not include personal details. On a Lite file, steps that stay with the manager are not selectable.
 
 People search checks each word against the start of a name, so a last name on its own finds the person.
 
@@ -119,7 +136,7 @@ Hiring activity is kept as a timeline on the hire and as a report. The timeline 
 
 ### Onboarding template
 
-Each company customizes its own onboarding template. The tasks a new hire receives follow that template.
+Each company customizes its own onboarding template. The tasks a new hire receives follow that template. Lite has its own onboarding checklist.
 
 ---
 
@@ -136,7 +153,7 @@ Every user, whether employee, manager, admin, payroll, or consultant, signs in t
 - **People**, which holds Employee files, Company list, Org chart, and Exits
 - **Tasks**
 - **Time**
-- **Hiring**
+- **Jobs & Recruiting**
 - **Compliance**
 - **Reports**
 - **Resources**
@@ -167,7 +184,7 @@ flowchart TB
         Needs["What needs you"]
         Clock["Clock card - live punch status"]
         Guide["Collapsed AI guide card"]
-        Work["People, Tasks, Time, Hiring,<br/>Compliance, Reports, Resources, Messages,<br/>Payroll export, Company settings"]
+        Work["People, Tasks, Time, Jobs & Recruiting,<br/>Compliance, Reports, Resources, Messages,<br/>Payroll export, Company settings"]
     end
     Desk --> Needs
     Desk --> Clock
@@ -204,7 +221,7 @@ flowchart LR
 
 HR consultants can serve several client companies. A consultant sees **only the companies assigned to them**, listed under *Your Companies* on their My access tab. A consultant's home shows setup status. Assigned HR consultants are shown at the client company.
 
-Each consultant's credentials are tracked. Every consultant holds an HR certification. A new client company can be assigned only when that consultant's credentials are current.
+Each consultant's credentials are tracked. Every consultant holds an HR certification. A new client company can be assigned only when that consultant's credentials are current. Credentials collapse after save. A credential expiry does not cut access on its own.
 
 ![Consultant My access showing Your Companies](docs/screenshots/consultant-your-companies.png)
 
@@ -216,19 +233,29 @@ Admins see tasks grouped by person. **My tasks** is pinned at the top. **Unassig
 
 A company setting, off by default, lets managers see open tasks for their reporting line.
 
+Admins and Assist can complete their reports' tasks. Errors show inline.
+
 Recruiting to-dos also show on Tasks. A person's employee tasks are listed here.
 
 ---
 
 ## Employee files
 
-In People, the directory tab is **Employee files**. It lists active employees only. The list is paged, and it can be sorted and filtered by name, location, and department. Each row shows the name, job title, department, and location.
+In People, the directory tab is **Employee files**. **Active + Leave** shows only Active and On leave. A **Prehires** view lists Pending hire, Pending contingencies, and Pending start. Prehires stay off the org chart and directory until they start. The list is paged, and it can be sorted and filtered by name, location, and department. Each row shows the name, job title, department, and location.
 
-On Profile, click a field to edit it in place. Employee tasks live on Tasks. Background and drug screen results are kept off the employee profile. A license or certificate is recorded on a form for that person.
+A person can have a **preferred or display name** shown across the product. The legal name is kept for official records.
+
+On Profile, click a field to edit it in place. The profile header shows the pay classification from the Job. The profile face sheet is tidied. Employee tasks live on Tasks. Background and drug screen results are kept off the employee profile. A license or certificate is recorded on a form for that person.
+
+Each person has a detected **work state**, so state-specific rules can apply.
 
 A company admin can help an employee at their own company who is stuck getting signed in. A consultant can help an employee at a company assigned to them.
 
 Opted-in profile notes stay on the person's profile. Employee files is separate from role-based visibility and never shows sensitive PII.
+
+### My information
+
+Employees have a **My information** page. It opens on **Profile** first. Sections the admin controls are marked **Set by your admin**. Employees can update their own contact details without HR approval. An acknowledgement name mismatch is shown on the form. Benefits includes **I am declining coverage**.
 
 ![Employee files](docs/screenshots/company-directory.png)
 
@@ -282,7 +309,7 @@ flowchart LR
 
 ## Org chart
 
-A top-down, collapsible org chart is built from reporting lines. Admins also get a restructure mode for planning changes. The org chart lives under People.
+A top-down, collapsible org chart is built from reporting lines. Admins also get a restructure mode for planning changes. The org chart lives under People. Prehires stay off the org chart until they start.
 
 ![Org chart](docs/screenshots/org-chart.png)
 
@@ -292,13 +319,41 @@ A top-down, collapsible org chart is built from reporting lines. Admins also get
 
 ## Employment history
 
-Job, pay, and manager changes are kept as dated history. A job change covers title, department, and location. Each entry records a reason, who made the change, and a source: hire, edit, restructure, coverage decision, or import. A future-dated change takes effect on its date.
+Job, pay, and manager changes are kept as dated history. A job change covers title, department, and location.
+
+**Pay classification lives on the Job.** Hourly vs Salary, FLSA status, and exempt basis are set on the Job, not on each person. A pay change is only the amount. Frequency comes from the company pay cycle. There is no per-employee override. Someone who does not fit that job moves to a different job. A job reclass applies to everyone in that job on one effective date, with a warning.
+
+Each entry records a reason, who made the change, and a source: hire, edit, restructure, coverage decision, or import. A future-dated change takes effect on its date.
+
+```mermaid
+flowchart TB
+    Job["Job"] --> Class["Hourly or Salary, FLSA status, exempt basis"]
+    Class --> People["Everyone in that job"]
+    Reclass["Job reclass on one effective date"] --> People
+    Pay["Pay change"] --> Amount["Amount only"]
+    Cycle["Company pay cycle"] --> Freq["Pay frequency"]
+```
+
+---
+
+## Performance
+
+Company setup has a **Performance** area. **Goals**, **Reviews**, and **Coaching** start on. Employees may add and edit their own goals. Goals are collaborative. Coaching has an audit trail. Unshared coaching notes are hidden from HR by default. **Feedback**, **Discipline**, and **PIPs** are marked Coming.
+
+```mermaid
+flowchart LR
+    Setup["Company setup: Performance"] --> On["Goals, Reviews, and Coaching start on"]
+    On --> Goals["Employees add and edit their own collaborative goals"]
+    On --> Coach["Coaching with an audit trail"]
+    Coach --> Hidden["Unshared notes hidden from HR by default"]
+    Setup --> Coming["Feedback, Discipline, and PIPs: Coming"]
+```
 
 ---
 
 ## Time
 
-Employees can clock in and out on a phone time clock. The clock card on My Desk shows live punch status. A punch saves instantly and never waits on a passkey or location. The mobile apps are prepared for an app-store release.
+Employees can clock in and out on a phone time clock. The clock card on My Desk shows live punch status. A punch saves instantly and never waits on a passkey or location. Times show in the company's time zone. The mobile apps are prepared for an app-store release.
 
 A downloadable **phone setup** guide walks through adding the clock to a phone. The home-screen icon uses the company mark and opens each user's own landing page.
 
@@ -308,7 +363,7 @@ flowchart LR
     Icon --> Land["Opens that user's landing page"]
 ```
 
-Each person has an **FLSA status**: exempt or non-exempt. An exempt employee uses an attendance-only clock. Weekly overtime is calculated on non-exempt time.
+**FLSA status** comes from the person's Job: exempt or non-exempt. An exempt employee uses an attendance-only clock. Weekly overtime is calculated on non-exempt time. Overtime follows non-exempt status.
 
 ### Break pay
 
@@ -325,17 +380,23 @@ flowchart LR
 
 A manager with direct reports can review, edit, and approve punches for their own team. **Punch review** does not require a company-wide timeclock privilege.
 
+Punch review is a compact timeline per pay period. A pending clock-out request pairs into the same card as its clock-in, even when the two are far apart, and is flagged for manager review. The punched side is green. The requested side is yellow and marked **Pending approval**, with **Approve** and **Deny**. Approvers can see the original time on a correction.
+
 ### When a pay period closes
 
-A missed punch that is still unresolved when the pay period closes stays open. In setup, the company chooses whether to hold payroll or to pay that time on an off-cycle or the next payroll. The default does not hold payroll. An admin can resolve or clear a missed punch in a past pay period.
+A missed punch that is still unresolved when the pay period closes stays open. In setup, the company chooses whether to hold payroll or to pay that time on an off-cycle or the next payroll. The default does not hold payroll. An admin can resolve or clear a missed punch in a past pay period. A punch adjustment in a prior period lands on the next payroll.
 
 ```mermaid
 flowchart LR
     Punch["Punch saves instantly"] --> Status["Live status on the clock card"]
-    Status --> Review["Manager Punch review"]
-    Review --> Close["Pay period close"]
+    Status --> Pair["Clock-in and pending clock-out on one card"]
+    Pair --> Review["Manager Punch review"]
+    Review --> Timeline["Compact per-period timelines"]
+    Timeline --> Close["Pay period close"]
     Close --> Missed["Missed punch handling"]
+    Close --> Next["Prior-period adjustments on next payroll"]
     Missed --> Export["Payroll export"]
+    Next --> Export
 ```
 
 ---
@@ -363,7 +424,7 @@ Managers get a dates-only toolkit: a team calendar, coverage overlap, expected r
 
 Company settings decides who receives a request: the direct manager, HR, or both. Each leave type has an approval chain and a backup approver.
 
-On a Soft file, leave stores only the reason category, dates, status, balances, and notice dates. A Soft file accepts no documents. On a Full file, medical certifications stay in a restricted medical file, separate from the personnel file. Every view of that file is logged.
+On a Lite file, leave stores only the reason category, dates, status, balances, and notice dates. A Lite file accepts no documents. On a Full file, medical certifications stay in a restricted medical file, separate from the personnel file. Every view of that file is logged.
 
 ### Coverage while a manager is on leave
 
@@ -387,7 +448,7 @@ Owners and partners can be set to **Top of company (no manager)**. They are not 
 
 ## Exits
 
-Offboarding works on Soft and Full. There are six exit types. Exits lives under People.
+Offboarding works on Lite and Full. There are six exit types. Exits lives under People.
 
 ```mermaid
 stateDiagram-v2
@@ -427,7 +488,7 @@ Final-pay guidance follows the work state's rule. It never waits on property ret
 
 The exits page is a short in-process list. Each row shows the name, the type, the last day, and progress. The exit template is pre-filled with recommended defaults, and an admin can edit it. My Desk shows a **My exit tasks** widget. Each exit has an append-only audit log.
 
-Soft keeps the reason category, notes, and document names. Full adds separation and release documents.
+Lite keeps the reason category, notes, and document names. Full adds separation and release documents.
 
 ---
 
@@ -440,7 +501,7 @@ Soft keeps the reason category, notes, and document names. Full adds separation 
 - Job setup is collapsed, so the candidate pipeline comes first.
 - Interviewers can be assigned on each stage of a job. Assigned consultants and company admins can be stage interviewers. A calendar stage can queue a Self Schedule invite.
 - Applications can be corrected by an admin, and every change is logged.
-- **Offer** and **reject** are separate actions. The Offer card's action is **Make offer**. The offer can be signed in the product. Sending an offer, and the candidate accepting it, completes the matching hiring checklist steps. Acceptance hires the person, and the start date comes from the accepted offer.
+- **Offer** and **reject** are separate actions. The Offer card's action is **Make offer**. An offer carries title, pay, department, location, full-time or part-time, work arrangement, worker type, and start date as fields. The offer letter and snapshot are built from those fields. Pay basis locks to the Job's pay type. Location and start date are required to send. The offer can be signed in the product. Sending an offer, and the candidate accepting it, completes the matching hiring checklist steps. Acceptance hires the person, and the start date comes from the accepted offer.
 - **Panel interviews**, where several interviewers share one calendar invite.
 - Interviewers get calendar invites. Candidates can't add guests; interviewers can.
 - Booking a video interview creates a real video meeting link on a single calendar event. When a video interview will not get a video-meeting link, the product shows a warning.
@@ -468,7 +529,7 @@ flowchart LR
 - Only events marked **Busy** block a time. Events marked **Free**, including all-day events, leave the time open.
 - Openings are recalculated every time the page loads; they are never frozen when the invite is sent.
 - If calendar availability can't be read, scheduling falls back to company business hours.
-- Times show in both the company's time zone and the candidate's local time zone.
+- Times show in both the company's time zone and the candidate's local time zone. Self Schedule respects time zones.
 
 ```mermaid
 sequenceDiagram
@@ -536,7 +597,7 @@ System scheduling activity is kept apart from human interview notes:
 
 ### Voluntary EEO
 
-Applicants on Soft and Full can complete a voluntary EEO self-identification. Every question can be skipped, or answered **Decline to self-identify**. Answers are kept apart from the application. They are never shown in hiring views. Reports show aggregate EEO-1 counts only, with no per-person list.
+Applicants on Lite and Full can complete a voluntary EEO self-identification. Every question can be skipped, or answered **Decline to self-identify**. Answers are kept apart from the application. They are never shown in hiring views. Reports show aggregate EEO-1 counts only, with no per-person list.
 
 ---
 
@@ -603,6 +664,8 @@ The fallback order can be adjusted here as well.
 
 **Break pay.** The company sets the paid-break threshold. The default is 30 minutes. Completed breaks under that threshold count as paid. Longer ones are unpaid meal breaks.
 
+**Performance.** Company setup has a Performance area. Goals, Reviews, and Coaching start on. Feedback, Discipline, and PIPs are marked Coming.
+
 ---
 
 ## Adding a new State?
@@ -621,6 +684,8 @@ Company admins open this guide in Company settings. They pick any of the 50 stat
 - Local ordinances
 
 Each item shows the employer-size threshold, who it covers, the rule in short, and its source. Items are badged **Not yet verified** or **Confirm with counsel** where that applies. Unsourced items are hidden.
+
+Each person has a detected work state, so these rules can apply to the right people.
 
 The page states that this is HR guidance, not legal advice, and that the product does not certify state compliance. The guide is maintained as data, so it can be updated without changing the screens.
 
@@ -700,7 +765,7 @@ Design principles:
 - **Audit by default.** Corrections, assists, scheduling events, investigation actions, exit actions, fallbacks, permission changes, and Form I-9 actions are attributed to the person who acted. Each view of an employee record is logged.
 - **Scheduled retention.** Deleted messages stay until the company period ends. A legal hold stops removal. A schedule shows when each Form I-9 can be purged.
 - **Opt-in filings.** Automated state new-hire reporting and E-Verify are built and turned off. A company opts in before either one runs.
-- **Data minimization.** Soft never stores sensitive PII, and Full stays limited to test data until it has been independently assessed.
+- **Data minimization.** Lite never stores sensitive PII, and Full stays limited to test data until it has been independently assessed.
 - **Every change ships through review.** Each change goes through a pull request, automated checks, and production verification.
 
 ---
