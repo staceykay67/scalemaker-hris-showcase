@@ -22,20 +22,22 @@ This repository is a **portfolio showcase**. It describes the product's design a
 - **My Desk.** Rebuilt for hourly and exempt staff. The clock card shows live punch status. Punches save instantly and never wait on a passkey or location. A collapsed AI guide card sits on My Desk.
 - **What needs you.** My Desk opens on the tasks that need you. Each task links straight to itself, with its due date in plain words.
 - **Getting started.** A new user follows three plain steps: create your password, secure your account, and you're ready. Sign-in help sits where people look for it.
-- **Passkeys.** Admins, consultants, and employees can set up a passkey once per device after a normal sign-in, then sign in with one tap on desktop and phone. Idle sign-out is unchanged.
+- **Passkeys.** Admins, consultants, and employees can set up a passkey once per device after a normal sign-in, then sign in with one tap on desktop and phone. The setup offer is a small link beside the person's name, not a large card. Idle sign-out is unchanged.
 - **Fine-grained roles** with per-module permissions and applicant scope. A person's record can grant or remove a permission, and the change history stays on the record. A hiring stage lead can advance or reject candidates at their stage. Permission sections sit behind a click.
 - **Multi-company consulting.** Consultants see only the companies assigned to them, and their home shows setup status. Credentials are tracked, and a new client assignment waits on current credentials. Credentials collapse after save. A credential expiry does not cut access on its own. Assigned HR consultants are shown at the client company.
 - **Tasks** grouped by person for admins, with recruiting to-dos included. Admins and Assist can complete their reports' tasks. Errors show inline.
-- **ATS** with the applied date, stage interviewers, paused jobs, video interviews, Self Schedule, rescheduling with limits, and an append-only scheduling history. Applicants review a resume prefill before they submit and can remove a chosen resume. Word resumes preview on the page. Resume import also fills in a LinkedIn or portfolio link. The Jobs list shows job status, and a permitted user can change it. The Offer card's action is Make offer.
+- **ATS** with the applied date, stage interviewers, paused jobs, video interviews, Self Schedule, rescheduling with limits, and an append-only scheduling history. An unsent Self Schedule invite follows the current stage interviewer. Applicants review a resume prefill before they submit and can remove a chosen resume. Word resumes preview on the page. Resume import also fills in a LinkedIn or portfolio link. The Jobs list shows job status, and a permitted user can change it. The Offer card's action is Make offer.
 - **Recruiting reach.** Organic job feeds for Indeed and ZipRecruiter, a per-job Post to job boards switch on the Job boards card, and applicant source tracking.
 - **Employee files** for active employees, paged and filterable by name, location, and department. Profile fields are edited in place by clicking them. Background and drug screen results stay off the profile. Licenses and certificates have their own form. A company admin can help their own employee get signed in, and a consultant can help an employee at an assigned company.
 - **Display and legal names.** A preferred or display name is shown across the product. The legal name is kept for official records.
 - **My information.** Employees open Profile first. Sections the admin controls are marked Set by your admin. Contact details can be updated without HR approval. Acknowledgement name mismatches show on the form. Benefits includes I am declining coverage.
 - **Pay classification on the Job.** Hourly vs Salary, FLSA status, and exempt basis live on the Job, not on each person. A pay change is only the amount. Frequency comes from the company pay cycle. Overtime follows non-exempt status. The profile header shows the classification.
+- **Job catalog.** Each job has a Work arrangement of Regular, Temporary, or Seasonal (default Regular), separate from employment type, and a private compensation range (minimum and maximum) for HR internal reference only. The range does not set pay or advertised ranges.
 - **Performance.** Company setup has a Performance area. Goals, Reviews, and Coaching start on. Employees can add and edit their own goals. Goals are collaborative. Coaching has an audit trail. Unshared coaching notes are hidden from HR by default. Feedback, Discipline, and PIPs are Coming.
 - **Contractors** with W-9 status and 1099 totals.
 - **Messages** for company announcements and an Ask HR channel. Ask HR routes to a role seat, and each question is its own thread.
 - **Surveys** for company admins and employees, with reporting filters, as-of snapshots, and an invitation email.
+- **Quality of Hire.** At day 30, 60, and 90 after a hire, the hire's current manager gets a short named pulse survey: engagement 1–5, fit with company values 1–5, and would you hire again yes/no with an optional comment. If no manager is set, the send is skipped and logged, and a later manager still gets it. One reminder email and a My Desk task. Existing new-hire 30/60/90 surveys are unchanged.
 - **Phone time clock.** Clock in and out from a phone. Times show in the company's time zone. A downloadable phone setup guide walks through the steps. The home-screen icon uses the company mark and opens each user's own landing page. The mobile apps are prepared for an app-store release.
 - **FLSA status** comes from the person's Job, exempt or non-exempt. Exempt employees use an attendance-only clock. Non-exempt time calculates weekly overtime.
 - **Break pay.** Completed breaks under a company-set threshold (default 30 minutes) count as paid. Longer ones are unpaid meal breaks.
@@ -50,6 +52,7 @@ This repository is a **portfolio showcase**. It describes the product's design a
 - **Records requests and OSHA.** Clocks track response deadlines for employee records requests. Accommodation requests are logged, and so is each view of an employee record. An OSHA injury and illness intake opens follow-up tasks that close out.
 - **Voluntary EEO** on Lite and Full. Answers stay out of hiring views and are reported only as aggregate counts.
 - **Company setup.** A guided wizard for a new company. Settings cover departments, a Common holidays picker, document types, contacts, and Performance.
+- **Employee Resources.** The Company tab has four subsections: About, History, Mission/Vision & Values, and Location. Each holds files, notes, and links. Opening a section shows its content right away. Notes render inline. Admins edit with a small pencil. A section an admin deletes is never recreated.
 - **Adding a new State?** guide in Company settings. It is HR guidance, not legal advice.
 - **Payroll and benefits export.** Ready-made payroll formats for common small-business providers, a standard file for any other provider, and a benefits carrier change file. Column order follows the vendor or carrier. The direct deposit form has safeguards. Pay can be split across more than one direct deposit account.
 - **AI advisor** on fictional demo companies only. It helps people find a screen, and a person confirms any change.
@@ -100,6 +103,7 @@ flowchart TB
     Checks -- "No" --> Start["Pending start"]
     Cont --> Active["Active on the start date"]
     Start --> Active
+    Active --> QoH["Quality of Hire pulses at day 30, 60, and 90"]
     Run --> Invite["HRis invite sent"]
     Invite --> Pass["New hire sets password"]
     Pass --> Wiz["Mandatory new-hire wizard"]
@@ -110,7 +114,7 @@ flowchart TB
     Full --> Done
 ```
 
-When the candidate accepts, that acceptance hires the person. Pending hires are numbered. Edits to the new hire stay in sync through the offer and the hire. A pending hire can have a manager. The person becomes **Pending start**, or **Pending contingencies** while a required background check, drug screen, or references are open. Only basic onboarding is released during contingencies. Employment status becomes **Active** on the start date. If the first day moves earlier, the pending start stays visible. A person can rescind the hire before the start date. Rescinding a pending hire withdraws that person's unused product invite. If a hire's invite did not send, the admin is told. The hiring manager and admins are notified. Every step is logged.
+When the candidate accepts, that acceptance hires the person. Pending hires are numbered. Edits to the new hire stay in sync through the offer and the hire. A pending hire can have a manager. The person becomes **Pending start**, or **Pending contingencies** while a required background check, drug screen, or references are open. Only basic onboarding is released during contingencies. Employment status becomes **Active** on the start date. If the first day moves earlier, the pending start stays visible. A person can rescind the hire before the start date. Rescinding a pending hire withdraws that person's unused product invite. If a hire's invite did not send, the admin is told. The hiring manager and admins are notified. Every step is logged. At day 30, 60, and 90 after a hire, the current manager gets a Quality of Hire pulse.
 
 The Employees list has a **Prehires** view for Pending hire, Pending contingencies, and Pending start. **Active + Leave** shows only Active and On leave. Prehires stay off the org chart and directory until they start.
 
@@ -156,7 +160,7 @@ Every user, whether employee, manager, admin, payroll, or consultant, signs in t
 - **Jobs & Recruiting**
 - **Compliance**
 - **Reports**
-- **Resources**
+- **Resources**, with a Company tab for About, History, Mission/Vision & Values, and Location
 - **Messages**
 - **Payroll export**
 - **Company settings**
@@ -199,11 +203,11 @@ flowchart TB
 
 A new user gets one plain-language **Getting started** flow in three steps: create your password, secure your account, and you're ready. Someone on a computer with their phone follows one path. Someone using only their phone follows another. **Sign-in help** sits where people look for it, behind **Having trouble?**
 
-After a normal sign-in, each device offers a one-time passkey setup. Admins, consultants, and employees can then sign in with one tap on desktop or phone. Idle sign-out is unchanged.
+After a normal sign-in, a small link beside the person's name offers a one-time passkey setup on that device. Admins, consultants, and employees can then sign in with one tap on desktop or phone. Idle sign-out is unchanged.
 
 ```mermaid
 flowchart LR
-    SignIn["Normal sign-in"] --> Offer["One-time passkey setup on this device"]
+    SignIn["Normal sign-in"] --> Offer["Small passkey setup link beside the person's name"]
     Offer --> Tap["One-tap passkey sign-in"]
 ```
 
@@ -307,6 +311,27 @@ flowchart LR
     Answers --> Report["Filtered report"]
 ```
 
+### Quality of Hire
+
+Quality of Hire uses Surveys. At day 30, 60, and 90 after a hire, the hire's current manager gets a short named pulse survey: engagement 1–5, fit with company values 1–5, and would you hire again yes/no with an optional comment.
+
+If no manager is set, the send is skipped and logged. A later manager still gets that pulse. There is one reminder email and a My Desk task. Existing new-hire 30/60/90 surveys are unchanged.
+
+```mermaid
+flowchart TB
+    Hire["Hire"] --> D30["Day 30"]
+    Hire --> D60["Day 60"]
+    Hire --> D90["Day 90"]
+    D30 --> Mgr{"Current manager set"}
+    D60 --> Mgr
+    D90 --> Mgr
+    Mgr -- "No" --> Skip["Skip and log"]
+    Skip --> Later["A later manager still gets it"]
+    Mgr -- "Yes" --> Pulse["Named pulse to the current manager"]
+    Pulse --> Questions["Engagement 1-5, values fit 1-5,<br/>hire again yes or no"]
+    Pulse --> Remind["One reminder email and a My Desk task"]
+```
+
 ## Org chart
 
 A top-down, collapsible org chart is built from reporting lines. Admins also get a restructure mode for planning changes. The org chart lives under People. Prehires stay off the org chart until they start.
@@ -323,11 +348,15 @@ Job, pay, and manager changes are kept as dated history. A job change covers tit
 
 **Pay classification lives on the Job.** Hourly vs Salary, FLSA status, and exempt basis are set on the Job, not on each person. A pay change is only the amount. Frequency comes from the company pay cycle. There is no per-employee override. Someone who does not fit that job moves to a different job. A job reclass applies to everyone in that job on one effective date, with a warning.
 
+Each job also has a **Work arrangement** of Regular, Temporary, or Seasonal. The default is Regular. It is separate from employment type. A private compensation range (minimum and maximum) is for HR internal reference only. It does not set pay or advertised ranges.
+
 Each entry records a reason, who made the change, and a source: hire, edit, restructure, coverage decision, or import. A future-dated change takes effect on its date.
 
 ```mermaid
 flowchart TB
     Job["Job"] --> Class["Hourly or Salary, FLSA status, exempt basis"]
+    Job --> Arrange["Work arrangement: Regular, Temporary, or Seasonal"]
+    Job --> Range["Private compensation range for HR"]
     Class --> People["Everyone in that job"]
     Reclass["Job reclass on one effective date"] --> People
     Pay["Pay change"] --> Amount["Amount only"]
@@ -497,9 +526,10 @@ Lite keeps the reason category, notes, and document names. Full adds separation 
 - Job postings, applications, and candidate notes.
 - The applied date shows next to each applicant.
 - Jobs can be filtered by status, location, and department. The Jobs list shows each job's status, and a permitted user can change it there.
+- Each job has a **Work arrangement** of Regular, Temporary, or Seasonal. The default is Regular. It is separate from employment type. A private compensation range (minimum and maximum) is for HR internal reference only. It does not set pay or advertised ranges.
 - A job can be **Paused**. It keeps its pipeline and disappears from the career page. The apply link says it isn't accepting applications right now.
 - Job setup is collapsed, so the candidate pipeline comes first.
-- Interviewers can be assigned on each stage of a job. Assigned consultants and company admins can be stage interviewers. A calendar stage can queue a Self Schedule invite.
+- Interviewers can be assigned on each stage of a job. Assigned consultants and company admins can be stage interviewers. A calendar stage can queue a Self Schedule invite. An unsent Self Schedule invite follows the current stage interviewer.
 - Applications can be corrected by an admin, and every change is logged.
 - **Offer** and **reject** are separate actions. The Offer card's action is **Make offer**. An offer carries title, pay, department, location, full-time or part-time, work arrangement, worker type, and start date as fields. The offer letter and snapshot are built from those fields. Pay basis locks to the Job's pay type. Location and start date are required to send. The offer can be signed in the product. Sending an offer, and the candidate accepting it, completes the matching hiring checklist steps. Acceptance hires the person, and the start date comes from the accepted offer.
 - **Panel interviews**, where several interviewers share one calendar invite.
@@ -530,6 +560,7 @@ flowchart LR
 - Openings are recalculated every time the page loads; they are never frozen when the invite is sent.
 - If calendar availability can't be read, scheduling falls back to company business hours.
 - Times show in both the company's time zone and the candidate's local time zone. Self Schedule respects time zones.
+- An unsent Self Schedule invite follows the current stage interviewer.
 
 ```mermaid
 sequenceDiagram
@@ -665,6 +696,27 @@ The fallback order can be adjusted here as well.
 **Break pay.** The company sets the paid-break threshold. The default is 30 minutes. Completed breaks under that threshold count as paid. Longer ones are unpaid meal breaks.
 
 **Performance.** Company setup has a Performance area. Goals, Reviews, and Coaching start on. Feedback, Discipline, and PIPs are marked Coming.
+
+---
+
+## Employee Resources
+
+Resources includes a **Company** tab with four subsections: **About**, **History**, **Mission/Vision & Values**, and **Location**. Each subsection holds files, notes, and links.
+
+Opening a section shows its content right away. Notes render inline. Admins edit with a small pencil. A section an admin deletes is never recreated.
+
+```mermaid
+flowchart TB
+    Res["Employee Resources"] --> Co["Company tab"]
+    Co --> About["About"]
+    Co --> Hist["History"]
+    Co --> Mission["Mission/Vision and Values"]
+    Co --> Loc["Location"]
+    About --> Content["Files, notes, and links"]
+    Hist --> Content
+    Mission --> Content
+    Loc --> Content
+```
 
 ---
 
