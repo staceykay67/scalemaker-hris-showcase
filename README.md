@@ -10,10 +10,10 @@ This repository is a **portfolio showcase**. It describes the product's design a
 
 ## Highlights
 
-- **Two-tier data model (Lite and Full)** that lets a company start without collecting sensitive personal data. Full and Lite run the same processes. The only difference is Full-file items such as Social Security number, date of birth, and bank information.
+- **A two-level records model** that lets a company start without collecting sensitive personal data. Both levels run the same processes. The only difference is whether items such as Social Security number, date of birth, and bank information are stored.
 - **Human-decides gates.** A person extends every offer, and the candidate accepts. Acceptance hires the person. Nothing rejects a candidate on its own.
 - **Guided hire-to-onboard flow.** Acceptance hires the person. Pending hires are numbered, edits stay in sync from the offer through the hire, and a pending hire can have a manager. The person is Pending start, or Pending contingencies while required checks are open, and Active on the start date. A pending start stays visible if the first day moves earlier. The HRis invite, password, and mandatory new-hire wizard follow. Rescinding a pending hire withdraws an unused product invite, and the admin is told if a hire's invite did not send.
-- **Prehires.** The Employees list has a Prehires view for Pending hire, Pending contingencies, and Pending start. Active + Leave shows only Active and On leave. Prehires stay off the org chart and directory until they start. Lite has its own onboarding checklist.
+- **Prehires.** The Employees list has a Prehires view for Pending hire, Pending contingencies, and Pending start. Active + Leave shows only Active and On leave. Prehires stay off the org chart and directory until they start. Companies that aren't storing sensitive personal data have their own onboarding checklist.
 - **Hiring history.** A timeline on the hire and a report across hiring. On the Profile, hiring history is collapsed.
 - **Onboarding templates** customized for each company.
 - **Structured offer terms.** An offer carries title, pay, department, location, full-time or part-time, work arrangement, worker type, and start date. The letter and snapshot are built from those fields. Pay basis locks to the Job. Location and start date are required to send.
@@ -45,12 +45,12 @@ This repository is a **portfolio showcase**. It describes the product's design a
 - **Missed punches** left unresolved when a pay period closes. Setup chooses whether to hold payroll or pay that time on an off-cycle or the next payroll. The default does not hold payroll. An admin can resolve or clear one in a past pay period.
 - **Leave desk** in Time. Managers see dates only. A long leave for a manager asks who covers the team. The request form has Cancel, and a double-clicked request is saved once. A time-off request can start today, and the end date starts as the start date.
 - **Person fallback.** Work for someone who is terminated, exiting, or on leave goes to the next active person, and the handoff is logged.
-- **Exits** for Lite and Full. A person confirms the exit, tasks route to roles, and direct reports get an interim owner before the last day.
+- **Exits** on both records levels. A person confirms the exit, tasks route to roles, and direct reports get an interim owner before the last day.
 - **Employment history** for job, pay, and manager changes, including changes dated in the future.
 - **Compliance** for Form I-9, Form W-4, state withholding, and new-hire reporting, with a clear status on each person. Form I-9 has an audit trail and a retention schedule that shows when each I-9 can be purged. Automated state new-hire reporting and E-Verify are built and off until a company opts in.
 - **Work state.** Each person has a detected work state so state-specific rules can apply.
 - **Records requests and OSHA.** Clocks track response deadlines for employee records requests. Accommodation requests are logged, and so is each view of an employee record. An OSHA injury and illness intake opens follow-up tasks that close out.
-- **Voluntary EEO** on Lite and Full. Answers stay out of hiring views and are reported only as aggregate counts.
+- **Voluntary EEO** on both records levels. Answers stay out of hiring views and are reported only as aggregate counts.
 - **Company setup.** A guided wizard for a new company. Settings cover departments, a Common holidays picker, document types, contacts, and Performance.
 - **Employee Resources.** The Company tab has four subsections: About, History, Mission/Vision & Values, and Location. Each holds files, notes, and links. Opening a section shows its content right away. Notes render inline. Admins edit with a small pencil. A section an admin deletes is never recreated.
 - **Adding a new State?** guide in Company settings. It is HR guidance, not legal advice.
@@ -61,11 +61,11 @@ This repository is a **portfolio showcase**. It describes the product's design a
 
 ---
 
-## Lite vs Full
+## Two records levels
 
-Scalemaker HRis has two file types with the **same information architecture**. Users learn one set of screens, and the file type decides which data can be stored. Full and Lite run the same processes. The only difference is Full-file items such as Social Security number, date of birth, and bank information.
+Scalemaker HRis has two records levels with the **same information architecture**. Users learn one set of screens, and the records level decides which data can be stored. Both levels run the same processes. The only difference is whether items such as Social Security number, date of birth, and bank information are stored.
 
-| | Lite | Full |
+| | Records without sensitive personal data | Complete employment records |
 |---|---|---|
 | Purpose | Day-to-day people operations without sensitive PII | Complete employment records, including sensitive PII |
 | Sensitive PII | Never stored | Supported, including Social Security number, date of birth, and bank information |
@@ -73,9 +73,9 @@ Scalemaker HRis has two file types with the **same information architecture**. U
 | Leave | Reason category, dates, status, balances, and notice dates; no documents | Medical certifications in a restricted medical file, separate from the personnel file; every view is logged |
 | Exits | Reason category, notes, and document names | Reason category, notes, document names, and separation and release documents |
 | EEO self-identification | Voluntary for applicants. Answers stay apart from the application | Same |
-| Current status | In use | Holds fictional testers only until a penetration test and SOC 2 are complete |
+| Current status | In use | Holds fictional testers only |
 
-Because the screens are the same, a company can move from Lite to Full later without retraining anyone.
+Because the screens are the same, a company can move to complete employment records later without retraining anyone.
 
 ---
 
@@ -108,10 +108,10 @@ flowchart TB
     Invite --> Pass["New hire sets password"]
     Pass --> Wiz["Mandatory new-hire wizard"]
     Wiz --> File{"File type"}
-    File -- "Lite" --> Lite["Profile and policies<br/>Manager eligibility checkbox"]
-    File -- "Full" --> Full["Profile and policies<br/>I-9 Section 1 and W-4"]
-    Lite --> Done["Employee record active"]
-    Full --> Done
+    File -- "without sensitive data" --> NoSens["Profile and policies<br/>Manager eligibility checkbox"]
+    File -- "complete records" --> Complete["Profile and policies<br/>I-9 Section 1 and W-4"]
+    NoSens --> Done["Employee record active"]
+    Complete --> Done
 ```
 
 When the candidate accepts, that acceptance hires the person. Pending hires are numbered. Edits to the new hire stay in sync through the offer and the hire. A pending hire can have a manager. The person becomes **Pending start**, or **Pending contingencies** while a required background check, drug screen, or references are open. Only basic onboarding is released during contingencies. Employment status becomes **Active** on the start date. If the first day moves earlier, the pending start stays visible. A person can rescind the hire before the start date. Rescinding a pending hire withdraws that person's unused product invite. If a hire's invite did not send, the admin is told. The hiring manager and admins are notified. Every step is logged. At day 30, 60, and 90 after a hire, the current manager gets a Quality of Hire pulse.
@@ -130,7 +130,7 @@ The wizard is mandatory. A new hire cannot reach the rest of the app until it is
 
 Sending an offer, and the candidate accepting it, completes the matching hiring checklist steps. The start date comes from the accepted offer. An offer carries title, pay, department, location, full-time or part-time, work arrangement, worker type, and start date as fields. The offer letter and snapshot are built from those fields. Pay basis locks to the Job's pay type. Location and start date are required to send.
 
-An admin can select several open onboarding tasks and email them to the new hire in one message. The admin previews the message first. It lists the task titles and due dates, and it includes a single sign-in link. It does not include personal details. On a Lite file, steps that stay with the manager are not selectable.
+An admin can select several open onboarding tasks and email them to the new hire in one message. The admin previews the message first. It lists the task titles and due dates, and it includes a single sign-in link. It does not include personal details. When the company isn't storing sensitive personal data, steps that stay with the manager are not selectable.
 
 People search checks each word against the start of a name, so a last name on its own finds the person.
 
@@ -140,7 +140,7 @@ Hiring activity is kept as a timeline on the hire and as a report. The timeline 
 
 ### Onboarding template
 
-Each company customizes its own onboarding template. The tasks a new hire receives follow that template. Lite has its own onboarding checklist.
+Each company customizes its own onboarding template. The tasks a new hire receives follow that template. Companies that aren't storing sensitive personal data have their own onboarding checklist.
 
 ---
 
@@ -453,7 +453,7 @@ Managers get a dates-only toolkit: a team calendar, coverage overlap, expected r
 
 Company settings decides who receives a request: the direct manager, HR, or both. Each leave type has an approval chain and a backup approver.
 
-On a Lite file, leave stores only the reason category, dates, status, balances, and notice dates. A Lite file accepts no documents. On a Full file, medical certifications stay in a restricted medical file, separate from the personnel file. Every view of that file is logged.
+When the company isn't storing sensitive personal data, leave stores only the reason category, dates, status, balances, and notice dates, and accepts no documents. On complete employment records, medical certifications stay in a restricted medical file, separate from the personnel file. Every view of that file is logged.
 
 ### Coverage while a manager is on leave
 
@@ -477,7 +477,7 @@ Owners and partners can be set to **Top of company (no manager)**. They are not 
 
 ## Exits
 
-Offboarding works on Lite and Full. There are six exit types. Exits lives under People.
+Offboarding works on both records levels. There are six exit types. Exits lives under People.
 
 ```mermaid
 stateDiagram-v2
@@ -517,7 +517,7 @@ Final-pay guidance follows the work state's rule. It never waits on property ret
 
 The exits page is a short in-process list. Each row shows the name, the type, the last day, and progress. The exit template is pre-filled with recommended defaults, and an admin can edit it. My Desk shows a **My exit tasks** widget. Each exit has an append-only audit log.
 
-Lite keeps the reason category, notes, and document names. Full adds separation and release documents.
+Records without sensitive personal data keep the reason category, notes, and document names. Complete employment records add separation and release documents.
 
 ---
 
@@ -628,7 +628,7 @@ System scheduling activity is kept apart from human interview notes:
 
 ### Voluntary EEO
 
-Applicants on Lite and Full can complete a voluntary EEO self-identification. Every question can be skipped, or answered **Decline to self-identify**. Answers are kept apart from the application. They are never shown in hiring views. Reports show aggregate EEO-1 counts only, with no per-person list.
+Applicants on both records levels can complete a voluntary EEO self-identification. Every question can be skipped, or answered **Decline to self-identify**. Answers are kept apart from the application. They are never shown in hiring views. Reports show aggregate EEO-1 counts only, with no per-person list.
 
 ---
 
@@ -817,7 +817,7 @@ Design principles:
 - **Audit by default.** Corrections, assists, scheduling events, investigation actions, exit actions, fallbacks, permission changes, and Form I-9 actions are attributed to the person who acted. Each view of an employee record is logged.
 - **Scheduled retention.** Deleted messages stay until the company period ends. A legal hold stops removal. A schedule shows when each Form I-9 can be purged.
 - **Opt-in filings.** Automated state new-hire reporting and E-Verify are built and turned off. A company opts in before either one runs.
-- **Data minimization.** Lite never stores sensitive PII, and Full stays limited to test data until it has been independently assessed.
+- **Data minimization.** Records without sensitive personal data never store it. Complete-record demo data in this showcase is fictional only.
 - **Every change ships through review.** Each change goes through a pull request, automated checks, and production verification.
 
 ---
